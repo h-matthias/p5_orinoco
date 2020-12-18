@@ -1,6 +1,18 @@
+
 .logo{
     height: 80px;
 }
-.bg-header, .bg-footer{
+.bg-header, .bg-footer, .link-card{
     background-color: #f3e9f1;
+}
+
+.link-card{
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    margin: .5rem;
+}
+.link-card:hover{
+    box-shadow: black 2px 2px 5px;
+    color: black;
 }
