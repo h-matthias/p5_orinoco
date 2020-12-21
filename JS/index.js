@@ -29,11 +29,11 @@ fetch("http://localhost:3000/api/cameras")
 function creatArticle(){
     const allArticle = document.getElementById("all-article");
     allArticle.innerHTML += `
-        <a class="link-card card col-12 col-md-3 col-xl-2" href="produit.html">
+        <a class="link-card card col-12 col-md-3 col-xl-2" href="produit.html?id=${cameras._id}">
             <h2>${cameras.name}</h2>
             <img class="img img-thumbnail" src="${cameras.imageUrl}" alt="${cameras.name}">
-            <p class="description">${cameras.description}</p>
-            <p class="lenses">Option disponible : ${len}</p>
+            <p class="description">${cameras.description}</p><hr>
+            <p class="lenses">Option disponible : ${len}</p><hr>
             <p cass="price">Prix : ${cameras.price} €</p>
         </a>
     ` ;

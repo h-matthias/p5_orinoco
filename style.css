@@ -16,3 +16,6 @@
     box-shadow: black 2px 2px 5px;
     color: black;
 }
+.link-card *:not(img){
+    margin: 0 .3rem 0;
+}
