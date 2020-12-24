@@ -2,7 +2,7 @@
 .logo{
     height: 80px;
 }
-.bg-header, .bg-footer, .link-card{
+.bg-header, .bg-footer, .link-card, .bg-card {
     background-color: #f3e9f1;
 }
 
