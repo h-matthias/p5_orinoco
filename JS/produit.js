@@ -9,7 +9,7 @@ const img = document.getElementById("img");
 const description = document.getElementById("description");
 const lenses = document.getElementById("lenses-select");
 const price = document.getElementById("price");
-const order = document.getElementById("order");
+const order = document.getElementById("basket");
 
 //recuperation des donnees backend et ajout dans le html
 let cam
@@ -27,4 +27,5 @@ fetch("http://localhost:3000/api/cameras/" + idCameras)
         }
         console.log(cam);
     })
-    .catch(error => console.error(error))
+    .catch(error => console.error(error));
+
