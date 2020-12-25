@@ -14,7 +14,7 @@ fetch("http://localhost:3000/api/cameras")
             for (lense of cameras.lenses){
                 if ( i != cameras.lenses.length){
                     len+= lense + " ou ";
-                    i++
+                    i++;
                 } else{
                     len+= lense ;
                 } 
@@ -38,3 +38,4 @@ function creatArticle(){
         </a>
     ` ;
 }
+

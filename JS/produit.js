@@ -1,6 +1,6 @@
 //recuperation de l'id dans l'URL
 let params = new URLSearchParams(document.location.search);
-let idCameras = params.get("id")
+let idCameras = params.get("id");
 console.log(idCameras);
 
 //recuperation des element html
@@ -23,7 +23,7 @@ fetch("http://localhost:3000/api/cameras/" + idCameras)
         img.setAttribute("src", cam.imageUrl);
         img.setAttribute("alt", cam.name);
         for (lense of cam.lenses){
-            lenses.innerHTML += `<option value:${lense}>${lense}</option> `
+            lenses.innerHTML += `<option value:${lense}>${lense}</option> `;
         }
         console.log(cam);
     })
