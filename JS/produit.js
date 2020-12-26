@@ -1,3 +1,4 @@
+/************     Recuperation et charchement dans la page HTML      ************/
 //recuperation de l'id dans l'URL
 let params = new URLSearchParams(document.location.search);
 let idCameras = params.get("id");
@@ -23,9 +24,40 @@ fetch("http://localhost:3000/api/cameras/" + idCameras)
         img.setAttribute("src", cam.imageUrl);
         img.setAttribute("alt", cam.name);
         for (lense of cam.lenses){
-            lenses.innerHTML += `<option value:${lense}>${lense}</option> `;
+            lenses.innerHTML += `<option value="${lense}">${lense}</option> `;
         }
         console.log(cam);
     })
     .catch(error => console.error(error));
+/************   FIN---  Recuperation et charchement dans la page HTML ---FIN     ************/
+
+
+/***************************     Ajout Panier      **********************************/
+
+const btnAddBasket = document.getElementById("basket");
+
+
+let optionLense = "none";
+
+lenses.addEventListener("change", (event) =>{
+    optionLense = event.target.value;
+    console.log(optionLense);
+});
+
+//ajout au panier si option été definie
+btnAddBasket.addEventListener("click", (e) =>{
+    if (optionLense !== "none"){
+        localStorage.setItem(idCameras, optionLense);
+        alert("L'article a bien été ajouté.");
+    }else {
+        //alert option non selectionner
+        alert("Veuillez selectionner une option pour l'ajouter au panier");
+    }
+});
+
+
+
+
+
+
 
