@@ -36,18 +36,33 @@ fetch("http://localhost:3000/api/cameras/" + idCameras)
 
 const btnAddBasket = document.getElementById("basket");
 
-
 let optionLense = "none";
-
 lenses.addEventListener("change", (event) =>{
     optionLense = event.target.value;
     console.log(optionLense);
 });
 
+let article = 1;
+const addLocalStorage = (data) => {
+    if (localStorage.getItem("article1") === null){
+        localStorage.setItem ("article" + article, data);
+    } else if(localStorage.length === article){
+        article ++;
+        localStorage.setItem ("article" + article, data);
+    }
+}
+
 //ajout au panier si option été definie
 btnAddBasket.addEventListener("click", (e) =>{
     if (optionLense !== "none"){
-        localStorage.setItem(idCameras, optionLense);
+        let data = {
+            name : cam.name,
+            imageUrl : cam.imageUrl,
+            price : cam.price,
+            option : optionLense
+        };
+        //convertie les donnée en JSON pour les stocker dans le localStorage
+        addLocalStorage(JSON.stringify(data));
         alert("L'article a bien été ajouté.");
     }else {
         //alert option non selectionner
