@@ -2,7 +2,6 @@
 //recuperation de l'id dans l'URL
 let params = new URLSearchParams(document.location.search);
 let idCameras = params.get("id");
-console.log(idCameras);
 
 //recuperation des element html
 const title = document.getElementById("title");
@@ -26,7 +25,6 @@ fetch("http://localhost:3000/api/cameras/" + idCameras)
         for (lense of cam.lenses){
             lenses.innerHTML += `<option value="${lense}">${lense}</option> `;
         }
-        console.log(cam);
     })
     .catch(error => console.error(error));
 /************   FIN---  Recuperation et charchement dans la page HTML ---FIN     ************/
@@ -42,14 +40,21 @@ lenses.addEventListener("change", (event) =>{
     console.log(optionLense);
 });
 
-let article = 1;
+
 const addLocalStorage = (data) => {
-    if (localStorage.getItem("article1") === null){
-        localStorage.setItem ("article" + article, data);
-    } else if(localStorage.length === article){
-        article ++;
-        localStorage.setItem ("article" + article, data);
-    }
+    if(localStorage.getItem("article" + 1) === null){
+        localStorage.setItem ("article" + 1, data);
+    }else{
+        for (let i = 0; i< localStorage.length; i++){
+            if (localStorage.getItem("article" + (i+2)) === null){
+                localStorage.setItem ("article" + (i+2), data);
+                console.log("article if =", (i+1) );
+                break;
+            }else{
+                continue;
+            }
+        }
+    } 
 }
 
 //ajout au panier si option été definie
