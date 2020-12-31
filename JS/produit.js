@@ -12,14 +12,14 @@ const price = document.getElementById("price");
 const order = document.getElementById("basket");
 
 //recuperation des donnees backend et ajout dans le html
-let cam
+let cam;
 fetch("http://localhost:3000/api/cameras/" + idCameras)
     .then(res => res.json())
     .then(res => {
         cam=res;
         title.innerHTML += cam.name;
         description.innerHTML += cam.description;
-        price.innerHTML +="Prix : "+ cam.price + " €";
+        price.innerHTML +="Prix : "+ (cam.price/100).toLocaleString("fr") + ".00 €";
         img.setAttribute("src", cam.imageUrl);
         img.setAttribute("alt", cam.name);
         for (lense of cam.lenses){
@@ -48,7 +48,6 @@ const addLocalStorage = (data) => {
         for (let i = 0; i< localStorage.length; i++){
             if (localStorage.getItem("article" + (i+2)) === null){
                 localStorage.setItem ("article" + (i+2), data);
-                console.log("article if =", (i+1) );
                 break;
             }else{
                 continue;
@@ -61,6 +60,7 @@ const addLocalStorage = (data) => {
 btnAddBasket.addEventListener("click", (e) =>{
     if (optionLense !== "none"){
         let data = {
+            id : cam._id,
             name : cam.name,
             imageUrl : cam.imageUrl,
             price : cam.price,
