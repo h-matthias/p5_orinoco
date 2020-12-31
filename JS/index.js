@@ -8,7 +8,6 @@ fetch("http://localhost:3000/api/cameras")
         let cam;
         for (cam of res){
             cameras = cam;
-            console.log(cameras);
             let lense;
             let i=1;
             for (lense of cameras.lenses){
@@ -30,11 +29,14 @@ function creatArticle(){
     const allArticle = document.getElementById("all-article");
     allArticle.innerHTML += `
         <a class="link-card card col-12 col-md-3 col-xl-2" href="produit.html?id=${cameras._id}">
-            <h2>${cameras.name}</h2>
-            <img class="img img-thumbnail" src="${cameras.imageUrl}" alt="${cameras.name}">
-            <p class="description">${cameras.description}</p>
-            <p class="lenses">Option disponible : ${len}</p>
-            <p cass="price">Prix : ${cameras.price} €</p>
+            <img class="card-img-top" src="${cameras.imageUrl}" alt="${cameras.name}">
+            <div class="card-body">
+                <h2 class="card-title">${cameras.name}</h2>
+                <p class="description card-text">${cameras.description}</p>
+                <p class="lenses">Option disponible : ${len}</p>
+                <p class="price card-text">Prix : ${(cameras.price/100).toLocaleString("fr")}.00 €</p>
+            </div>
+            
         </a>
     ` ;
 }
