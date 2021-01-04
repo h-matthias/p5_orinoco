@@ -129,10 +129,10 @@ function checkInput (txt, input) {
 
 function istext (text){
     return /[A-Za-z]{1,}/.test(text);
-}
+};
 function isEmail (email){
-    return /[a-z0-9](?:.[a-z0-9-_.]+)*@[a-z0-9]+(?:.[a-z0-9-]+)(?:.[a-z]+)/.test(email);
-}
+    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+};
 
 let contact;
 //cree le contact 
@@ -166,13 +166,14 @@ function sendOrder(){
     .then(res => res.json())
     .then(res => console.log(res))
     .catch(error => console.log(error))
-}
+};
 
 function saveResOrder(res){
     for (let response of res){
         localStorage.setItem("firstname", response.contact.firstName);
         console.log(localStorage.getItem("firstname"));
     }
-}
+};
+
 
 

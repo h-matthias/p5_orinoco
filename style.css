@@ -28,12 +28,12 @@
 }
 .valide{
     border: 2px solid green;
-    background: rgb(202, 252, 126);
+    background-color: rgb(237, 247, 222)!important;
     color: black;
 }
 
 .notValide{
     border: 2px solid rgb(148, 0, 0);
-    background: rgb(255, 155, 155);
+    background: rgb(247, 215, 215);
     color: black!important;
 }
