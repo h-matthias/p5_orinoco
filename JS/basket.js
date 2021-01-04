@@ -62,18 +62,77 @@ function removeItem(item){
 
 
 
-//recupere les donner saisie de l'acheteur
-let nameContact;
-inputName.addEventListener("input",(e)=> nameContact = e.target.value);  
-let firstnameContact;
-inputFirstname.addEventListener("input",(e)=> firstnameContact = e.target.value);
-let addressContact;
-inputAddress.addEventListener("input",(e)=> addressContact = e.target.value);
-let cityContact;
-inputCity.addEventListener("input",(e)=> cityContact = e.target.value);
-let emailContact;
-inputEmail.addEventListener("input",(e)=> emailContact = e.target.value);
+/*******  recupere les donner saisie de l'acheteur et verifie ********/
+let nameContact ="";
+let isNameContactValid = false;
+inputName.addEventListener("input",(e)=>{
+    //isNameContactValid = istext(e.target.value);
+    isNameContactValid = checkInput(e.target.value, inputName);
+    if(isNameContactValid){
+        nameContact = e.target.value;
+    }
+});
 
+let firstnameContact ="";
+let isFirstnameContactValid = false;
+inputFirstname.addEventListener("input",(e)=> {
+    isFirstnameContactValid = checkInput(e.target.value, inputFirstname);
+    if(isFirstnameContactValid){
+        firstnameContact = e.target.value;
+    }
+});
+let addressContact ="";
+let isAddressContactValid = false;
+inputAddress.addEventListener("input",(e)=> {
+    isAddressContactValid = checkInput(e.target.value, inputAddress);
+    if(isAddressContactValid){
+        addressContact = e.target.value;
+    }
+});
+
+let cityContact ="";
+let isCityContactValid = false;
+inputCity.addEventListener("input",(e)=> {
+    isCityContactValid = checkInput(e.target.value, inputCity);
+    if(isCityContactValid){
+        cityContact = e.target.value;
+    }
+});
+
+let emailContact ="";
+let isEmailContactValid = false;
+inputEmail.addEventListener("input",(e)=> {
+    isEmailContactValid = isEmail(e.target.value);
+    if (isEmailContactValid) {
+        inputEmail.classList.add("valide");
+        inputEmail.classList.remove("notValide");
+        emailContact = e.target.value;
+
+    } else {
+        inputEmail.classList.remove("valide");
+        inputEmail.classList.add("notValide");
+        emailContact = "";
+    }
+});
+
+function checkInput (txt, input) {
+    if(txt!=""){
+        input.classList.add("valide");
+        input.classList.remove("notValide");
+        return true;
+    }else{
+        input.classList.remove("valide");
+        input.classList.add("notValide");
+        return false;
+    }
+};
+
+function istext (text){
+    return /[A-Za-z]{1,}/.test(text);
+}
+function isEmail (email){
+    return /[a-z0-9](?:.[a-z0-9-_.]+)*@[a-z0-9]+(?:.[a-z0-9-]+)(?:.[a-z]+)/.test(email);
+}
 
 let contact;
 //cree le contact 
@@ -92,7 +151,6 @@ btnOrder.addEventListener("click", (e) => {
     e.preventDefault();
     sendOrder();
 });
-
 
 
 function sendOrder(){
