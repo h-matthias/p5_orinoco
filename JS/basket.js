@@ -41,32 +41,26 @@ function writeArticle(){
     }
     totalPrice.innerHTML = (totalBasket/100).toLocaleString("fr") + ".00 €";
 };
+/*** ecriture de la page ****/
 writeArticle();
-////console.log(products.length + " produit " + products )
+/*************************************************************/
 
-const btnRemove = document.querySelectorAll("button[data-parent]");
-//console.log(btnRemove);
-
-/**** Supprime l'article au click du boutton supprime via la page panier.html *****/
+/************
+ * Supprime l'article au click du boutton supprime via la page panier.html 
+ *  avec la function onclick sur le boutton 
+ * *****/
 function removeItem(item){
     //console.log(item.id)
     localStorage.removeItem(item.id);
-        //recharge la page pour actualiser le panier le le total
-        document.location.reload();
-        
+    //recharge la page pour actualiser le panier le le total
+    document.location.reload(); 
 };
-
-
-
-
-
-
+/*************************/
 
 /*******  recupere les donner saisie de l'acheteur et verifie ********/
 let nameContact ="";
 let isNameContactValid = false;
 inputName.addEventListener("input",(e)=>{
-    //isNameContactValid = istext(e.target.value);
     isNameContactValid = checkInput(e.target.value, inputName);
     if(isNameContactValid){
         nameContact = e.target.value;
@@ -81,10 +75,11 @@ inputFirstname.addEventListener("input",(e)=> {
         firstnameContact = e.target.value;
     }
 });
+
 let addressContact ="";
 let isAddressContactValid = false;
 inputAddress.addEventListener("input",(e)=> {
-    isAddressContactValid = checkInput(e.target.value, inputAddress);
+    isAddressContactValid = checkInputAdd(e.target.value, inputAddress);
     if(isAddressContactValid){
         addressContact = e.target.value;
     }
@@ -93,7 +88,7 @@ inputAddress.addEventListener("input",(e)=> {
 let cityContact ="";
 let isCityContactValid = false;
 inputCity.addEventListener("input",(e)=> {
-    isCityContactValid = checkInput(e.target.value, inputCity);
+    isCityContactValid = checkInputAdd(e.target.value, inputCity);
     if(isCityContactValid){
         cityContact = e.target.value;
     }
@@ -102,21 +97,21 @@ inputCity.addEventListener("input",(e)=> {
 let emailContact ="";
 let isEmailContactValid = false;
 inputEmail.addEventListener("input",(e)=> {
-    isEmailContactValid = isEmail(e.target.value);
-    if (isEmailContactValid) {
-        inputEmail.classList.add("valide");
-        inputEmail.classList.remove("notValide");
+    isEmailContactValid = checkInputMail(e.target.value, inputEmail);
+    if(isEmailContactValid){
         emailContact = e.target.value;
-
-    } else {
-        inputEmail.classList.remove("valide");
-        inputEmail.classList.add("notValide");
-        emailContact = "";
     }
 });
 
+/********
+ * fonction de verification  
+ *  1 pour nom prenom selon un regex
+ *  1 pour email selon un regex
+ *  1 pour adresse et ville verifie juste qu'il n'est pas vide
+ * *******/
+
 function checkInput (txt, input) {
-    if(txt!=""){
+    if(istext(txt)){
         input.classList.add("valide");
         input.classList.remove("notValide");
         return true;
@@ -126,13 +121,36 @@ function checkInput (txt, input) {
         return false;
     }
 };
-
+function checkInputMail (txt, input) {
+    if(isEmail(txt)){
+        input.classList.add("valide");
+        input.classList.remove("notValide");
+        return true;
+    }else{
+        input.classList.remove("valide");
+        input.classList.add("notValide");
+        return false;
+    }
+};
+function checkInputAdd (txt, input) {
+    if( txt!=="" ){
+        input.classList.add("valide");
+        input.classList.remove("notValide");
+        return true;
+    }else{
+        input.classList.remove("valide");
+        input.classList.add("notValide");
+        return false;
+    }
+};
+/**** REGEX ****/
 function istext (text){
-    return /[A-Za-z]{1,}/.test(text);
+    return /^[A-Za-z]{1,}$/.test(text);
 };
 function isEmail (email){
     return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
 };
+/*************************************/
 
 let contact;
 //cree le contact 
@@ -152,11 +170,8 @@ btnOrder.addEventListener("click", (e) => {
     sendOrder();
 });
 
-
 function sendOrder(){
     createContact();
-    //console.log(contact);
-
     fetch("http://localhost:3000/api/cameras/order", {
         method: "POST", 
         mode : "cors",
@@ -168,12 +183,10 @@ function sendOrder(){
     .catch(error => console.log(error))
 };
 
-function saveResOrder(res){
-    for (let response of res){
-        localStorage.setItem("firstname", response.contact.firstName);
-        console.log(localStorage.getItem("firstname"));
+function clearLocalStorage();
+    for(article of localStorage){
+        
     }
-};
 
 
 
