@@ -7,16 +7,27 @@ const inputAddress = document.getElementById("inputAddress");
 const inputCity = document.getElementById("inputCity");
 const inputEmail = document.getElementById("inputEmail");
 
+/**** REGEX ****/
+function isArticle(key){
+    return /^article/.test(key);
+};
+function istext (text){
+    return /^[A-Za-z]{1,}$/.test(text);
+};
+function isEmail (email){
+    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+};
+/*************************************/
+
 let products =[];
 /**** creation des article dans le panier via le localStorage ****/
 function writeArticle(){
     let numberArticle = 1;
     let totalBasket = 0;
     //console.log(localStorage);
-    for (let i = 0; i<=100 /*localStorage.length*/; i++){
-        //verifie si l'article existe dans le local storage
-        if (localStorage.getItem("article"+ numberArticle)!==null){
-            let value = JSON.parse(localStorage.getItem("article"+ numberArticle));
+    for(let key in localStorage) {
+        if (isArticle(key)){
+            let value = JSON.parse(localStorage.getItem(key));
             articleBasket.innerHTML += `
                 <div class="row d-md-flex" id="article${numberArticle}">
                     <div class="col-4">
@@ -32,14 +43,14 @@ function writeArticle(){
                     <div class="col-3">${(value.price/100).toLocaleString("fr")}.00 €</div>
                 </div>
                 <hr>`;
-            numberArticle++;
+            //numberArticle++;
             totalBasket+= value.price;
             products.push(value.id);
-        } else{
-            numberArticle++;
         }
     }
     totalPrice.innerHTML = (totalBasket/100).toLocaleString("fr") + ".00 €";
+    //enregistre le prix total dans le localStorage pour la confirmation de commande
+    localStorage.setItem("totalPrice", totalBasket)
 };
 /*** ecriture de la page ****/
 writeArticle();
@@ -143,14 +154,7 @@ function checkInputAdd (txt, input) {
         return false;
     }
 };
-/**** REGEX ****/
-function istext (text){
-    return /^[A-Za-z]{1,}$/.test(text);
-};
-function isEmail (email){
-    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
-};
-/*************************************/
+/*****************************************/
 
 let contact;
 //cree le contact 
@@ -181,20 +185,24 @@ function sendOrder(){
         body : JSON.stringify({contact, products})
     })
     .then(res => res.json())
-    .then(res => clearLocalStorage())
+    .then(res => {
+        console.log(res.orderId);
+        localStorage.setItem("orderId", res.orderId);
+        clearLocalStorage();
+        document.location = "commande.html";
+    })
     .catch(error => console.log(error))
 };
 
 
-function isArticle(key){
-    return /^article/.test(key);
-}
+/********
+ * Supprime juste les articles commander
+ * quand l'utilisateur valide sa commande
+ **********/
 function clearLocalStorage(){
     for(let key in localStorage) {
         if (isArticle(key)){
-            console.log("key : "+ key);
-            console.log(localStorage.getItem(key));
-            //localStorage.removeItem(article);
+            localStorage.removeItem(key);
         }
     }
 }
