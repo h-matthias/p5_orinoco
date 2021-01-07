@@ -162,6 +162,8 @@ function createContact() {
         city : cityContact,
         email : emailContact
     }
+    //sauvegarde le prenom pour la confirmation de commande
+    localStorage.setItem("firstname", contact.firstName);
 };
 
 const btnOrder = document.getElementById("order");
@@ -179,14 +181,24 @@ function sendOrder(){
         body : JSON.stringify({contact, products})
     })
     .then(res => res.json())
-    .then(res => console.log(res))
+    .then(res => clearLocalStorage())
     .catch(error => console.log(error))
 };
 
-function clearLocalStorage();
-    for(article of localStorage){
-        
+
+function isArticle(key){
+    return /^article/.test(key);
+}
+function clearLocalStorage(){
+    for(let key in localStorage) {
+        if (isArticle(key)){
+            console.log("key : "+ key);
+            console.log(localStorage.getItem(key));
+            //localStorage.removeItem(article);
+        }
     }
+}
+    
 
 
 
