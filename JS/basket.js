@@ -22,21 +22,21 @@ function isEmail (email){
 let products =[];
 /**** creation des articles dans le panier via le localStorage ****/
 function writeArticle(){
-    let numberArticle = 1;
+    //let numberArticle = 1;
     let totalBasket = 0;
     //console.log(localStorage);
     for(let key in localStorage) {
         if (isArticle(key)){
             let value = JSON.parse(localStorage.getItem(key));
             articleBasket.innerHTML += `
-                <div class="row d-md-flex" id="article${numberArticle}">
+                <div class="row d-md-flex" id="${key}">
                     <div class="col-4">
                         <p>${value.name}</p>
                         <p>${value.option}</p>
                     </div>
                     <div class="col-3">${(value.price/100).toLocaleString("fr")}.00 €</div>
                     <div class="col-2">
-                        <button class="delete btn border border-2 border-dark" onclick="removeItem(article${numberArticle})">
+                        <button class="delete btn border border-2 border-dark" onclick="removeItem(${key})">
                             Supprimer
                         </button>
                     </div>
