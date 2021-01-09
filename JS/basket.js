@@ -1,4 +1,4 @@
-/** Recuperation des element HTML **/
+/** Recuperation des elements HTML **/
 const articleBasket = document.getElementById("articleBasket");
 const totalPrice = document.getElementById("totalPrice");
 const inputName = document.getElementById("inputName");
@@ -20,7 +20,7 @@ function isEmail (email){
 /*************************************/
 
 let products =[];
-/**** creation des article dans le panier via le localStorage ****/
+/**** creation des articles dans le panier via le localStorage ****/
 function writeArticle(){
     let numberArticle = 1;
     let totalBasket = 0;
@@ -37,7 +37,7 @@ function writeArticle(){
                     <div class="col-3">${(value.price/100).toLocaleString("fr")}.00 €</div>
                     <div class="col-2">
                         <button class="delete btn border border-2 border-dark" onclick="removeItem(article${numberArticle})">
-                            supprimer
+                            Supprimer
                         </button>
                     </div>
                     <div class="col-3">${(value.price/100).toLocaleString("fr")}.00 €</div>
@@ -57,18 +57,18 @@ writeArticle();
 /*************************************************************/
 
 /************
- * Supprime l'article au click du boutton supprime via la page panier.html 
- *  avec la function onclick sur le boutton 
+ * Supprime l'article au clic du bouton via la page panier.html 
+ *  avec la fonction onclick sur le bouton 
  * *****/
 function removeItem(item){
     //console.log(item.id)
     localStorage.removeItem(item.id);
-    //recharge la page pour actualiser le panier le le total
+    //recharge la page pour actualiser le panier et le total
     document.location.reload(); 
 };
 /*************************/
 
-/*******  recupere les donner saisie de l'acheteur et verifie ********/
+/*******  recupere les donnees saisies de l'acheteur et les verifie ********/
 let nameContact ="";
 let isNameContactValid = false;
 inputName.addEventListener("input",(e)=>{
@@ -118,7 +118,7 @@ inputEmail.addEventListener("input",(e)=> {
  * fonction de verification  
  *  1 pour nom prenom selon un regex
  *  1 pour email selon un regex
- *  1 pour adresse et ville verifie juste qu'il n'est pas vide
+ *  1 pour adresse et ville
  * *******/
 
 function checkInput (txt, input) {

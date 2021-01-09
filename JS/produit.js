@@ -1,9 +1,9 @@
-/************     Recuperation et charchement dans la page HTML      ************/
+/************     Recuperation et chargement dans la page HTML      ************/
 //recuperation de l'id dans l'URL
 let params = new URLSearchParams(document.location.search);
 let idCameras = params.get("id");
 
-//recuperation des element html
+//recuperation des elements html
 const title = document.getElementById("title");
 const img = document.getElementById("img");
 const description = document.getElementById("description");
@@ -27,11 +27,10 @@ fetch("http://localhost:3000/api/cameras/" + idCameras)
         }
     })
     .catch(error => console.error(error));
-/************   FIN---  Recuperation et charchement dans la page HTML ---FIN     ************/
+/*******************************************************/
 
 
 /***************************     Ajout Panier      **********************************/
-
 const btnAddBasket = document.getElementById("basket");
 
 let optionLense = "none";
@@ -56,7 +55,7 @@ const addLocalStorage = (data) => {
     } 
 }
 
-//ajout au panier si option été definie
+//ajout au panier si l'option a été definie
 btnAddBasket.addEventListener("click", (e) =>{
     if (optionLense !== "none"){
         let data = {
@@ -66,11 +65,11 @@ btnAddBasket.addEventListener("click", (e) =>{
             price : cam.price,
             option : optionLense
         };
-        //convertie les donnée en JSON pour les stocker dans le localStorage
+        //converti les donnees en JSON pour les stocker dans le localStorage
         addLocalStorage(JSON.stringify(data));
         alert("L'article a bien été ajouté.");
     }else {
-        //alert option non selectionner
+        //alerte option non selectionnee
         alert("Veuillez selectionner une option pour l'ajouter au panier");
     }
 });

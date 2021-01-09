@@ -12,7 +12,7 @@ totalPrice.innerHTML = (total/100).toLocaleString("fr") + ".00 €";
 
 
 /*****
- * Liberation des information de confirmation
+ * Liberation des informations de confirmation
  * dans le localStorage 
  * ****/
     localStorage.removeItem("firstname");

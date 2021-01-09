@@ -1,7 +1,7 @@
 let cameras;
 let len ="";
 
-// fonction fetch pour recupere les donnés
+// fonction fetch pour recuperer les donnees
 fetch("http://localhost:3000/api/cameras")
     .then(res => res.json())
     .then(res => {
@@ -19,12 +19,12 @@ fetch("http://localhost:3000/api/cameras")
                 } 
             }
             creatArticle();//lance la fonction creation article
-            len = "";//reinisialise la variable a vide
+            len = "";//reinitialise la variable a vide
         }
     })
     .catch(error => console.log(error));
 
-//fonction qui crée chaque article dans le HTML
+//fonction qui creer chaque article dans le HTML
 function creatArticle(){
     const allArticle = document.getElementById("all-article");
     allArticle.innerHTML += `
