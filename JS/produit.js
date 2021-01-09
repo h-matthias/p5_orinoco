@@ -10,6 +10,8 @@ const description = document.getElementById("description");
 const lenses = document.getElementById("lenses-select");
 const price = document.getElementById("price");
 const order = document.getElementById("basket");
+const titlePage = document.getElementById("titlePage");
+const descPage = document.getElementById("descPage")
 
 //recuperation des donnees backend et ajout dans le html
 let cam;
@@ -25,6 +27,8 @@ fetch("http://localhost:3000/api/cameras/" + idCameras)
         for (lense of cam.lenses){
             lenses.innerHTML += `<option value="${lense}">${lense}</option> `;
         }
+        titlePage.innerHTML = cam.name;//titre page
+        descPage.setAttribute("content", cam.description);//description de la page (meta)
     })
     .catch(error => console.error(error));
 /*******************************************************/
