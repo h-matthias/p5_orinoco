@@ -15,7 +15,7 @@ const descPage = document.getElementById("descPage")
 
 //recuperation des donnees backend et ajout dans le html
 let cam;
-fetch("http://localhost:3000/api/cameras/" + idCameras)
+fetch("https://orinoco-p5.herokuapp.com/api/cameras/" + idCameras)
     .then(res => res.json())
     .then(res => {
         cam=res;

@@ -177,7 +177,7 @@ btnOrder.addEventListener("click", (e) => {
 
 function sendOrder(){
     createContact();
-    fetch("http://localhost:3000/api/cameras/order", {
+    fetch("https://orinoco-p5.herokuapp.com/api/cameras/order", {
         method: "POST", 
         mode : "cors",
         headers : {"Content-Type" : "application/json"},

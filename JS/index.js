@@ -2,7 +2,7 @@ let cameras;
 let len ="";
 
 // fonction fetch pour recuperer les donnees
-fetch("http://localhost:3000/api/cameras")
+fetch("https://orinoco-p5.herokuapp.com/api/cameras")
     .then(res => res.json())
     .then(res => {
         let cam;
